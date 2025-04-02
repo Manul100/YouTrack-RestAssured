@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string",
+                "pattern": "^\\d+-\\d+$"
+            },
+            "summary": {
+                "type": "string"
+            },
+            "description": {
+                "type": ["string", "null"]
+            },
+            "$type": {
+                "type": "string",
+                "const": "Issue"
+            },
+            "project": {
+                "type": "object",
+                "properties": {
+                    "$type": {
+                        "type": "string",
+                        "const": "Project"
+                    }
+                },
+                "required": ["$type"],
+                "additionalProperties": false
+            },
+            "customFields": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "$type": {
+                            "type": "string",
+                            "pattern": "^(SingleEnum|State|SingleUser|MultiVersion|Simple|SingleOwned|SingleBuild|Period)IssueCustomField$"
+                        },
+                        "id": {
+                            "type": "string",
+                            "pattern": "^\\d+-\\d+$"
+                        }
+                    },
+                    "required": ["name", "$type"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "required": ["id", "summary", "$type", "project", "customFields"],
+        "additionalProperties": false
+    }
+}

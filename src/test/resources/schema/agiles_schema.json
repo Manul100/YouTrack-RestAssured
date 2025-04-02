@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string",
+                "pattern": "^\\d+-\\d+$"
+            },
+            "name": {
+                "type": "string"
+            },
+            "$type": {
+                "type": "string",
+                "const": "Agile"
+            },
+            "columnSettings": {
+                "type": "object",
+                "properties": {
+                    "columns": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "pattern": "^\\d+-\\d+$"
+                                },
+                                "$type": {
+                                    "type": "string",
+                                    "const": "AgileColumn"
+                                }
+                            },
+                            "required": ["id", "$type"],
+                            "additionalProperties": false
+                        }
+                    },
+                    "$type": {
+                        "type": "string",
+                        "const": "ColumnSettings"
+                    }
+                },
+                "required": ["columns", "$type"],
+                "additionalProperties": false
+            },
+            "projects": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "shortName": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string",
+                            "pattern": "^\\d+-\\d+$"
+                        },
+                        "$type": {
+                            "type": "string",
+                            "const": "Project"
+                        }
+                    },
+                    "required": ["shortName", "id", "$type"],
+                    "additionalProperties": false
+                }
+            },
+            "owner": {
+                "type": "object",
+                "properties": {
+                    "$type": {
+                        "type": "string",
+                        "const": "User"
+                    }
+                },
+                "required": ["$type"],
+                "additionalProperties": false
+            },
+            "status": {
+                "type": "object",
+                "properties": {
+                    "valid": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string",
+                        "const": "boardStatus"
+                    },
+                    "$type": {
+                        "type": "string",
+                        "const": "AgileStatus"
+                    }
+                },
+                "required": ["valid", "id", "$type"],
+                "additionalProperties": false
+            }
+        },
+        "required": ["id", "name", "$type", "columnSettings", "projects", "owner", "status"],
+        "additionalProperties": false
+    }
+}
